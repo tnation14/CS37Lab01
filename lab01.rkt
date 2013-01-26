@@ -129,22 +129,28 @@
           (else else-clause))))
 
 (square-root 4)
-; After modifying the sqrt-iter p=rocedure as described in 1.6, answer:
+; After modifying the sqrt-iter procedure as described in 1.6, answer:
 ; a. What happens when Alyssa attempts to use this to compute square 
 ;    roots?  Explain.
-; The square root program enters an infinite loop. When using the new-if
-; procedure, the program is actually incrementing the value of guess twice: once in
-; good enough? and once when the predicate evaluates to false, requiring a call to
-; improve guess. This double incrementation will lead to us missing the proper square
-; root, trapping us in an infinite loop. 
-
+; Since new-if is not a special form, the Racket rule of evaluation applies. Good enough?
+; evaluates to false, and guess evaluates to itself, then the sqrt-iter is called next.
+; New-if never evaluates, and the recursive cycle continues infinitely.
 
 ; b. Come up with another example where "new-if" does not work as you would
 ;    expect "if" to work.
+; Any function that recursively moves from a start guess to a goal using a check would not
+; work with new-if. Consider this function:
 
-; The order of evaluation in the new-if is important, as it is a condition statement. If,
-; for example, we were to switch the order of predicates in the new-if in the previous example,
-; the program would again run forever. 
+ (define iter-correctGuess?
+ 	(lambda (guess,goal)
+ 		(if (isGoal (guess)) #T
+ 			(iter-correctGuess (guess+1,goal))
+ 			)
+ 		)
+ 	)
+ 	
+ ; Using new-if here, we would evaluate isGoal and the recursive call to iter-correctGuess
+ ; before the new-if, leading to another infinite loop.
 
 
 
