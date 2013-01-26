@@ -72,7 +72,8 @@
     ((if (> b 0) + -) a b)))
 
 
-;Adds a and b if b is positive, subtracts b from a.
+; Adds a and b if b is positive; subtracts b from a if b is negative. In other 
+; words, it adds the absolute value of b to a.
 
 
 
@@ -128,7 +129,7 @@
     (cond (predicate then-clause)
           (else else-clause))))
 
-(square-root 4)
+; (square-root 4)
 ; After modifying the sqrt-iter p=rocedure as described in 1.6, answer:
 ; a. What happens when Alyssa attempts to use this to compute square 
 ;    roots?  Explain.
@@ -151,3 +152,27 @@
 ; 6. Complete exercise 1.8 (page 26)
 ; http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-10.html#%_thm_1.8
 
+(define cube-root-iter
+  (lambda (guess x)
+    (if (good-enough-cube? guess x)
+        guess
+        (cube-root-iter (improve-cube guess x) x
+                        ))))
+
+(define good-enough-cube?
+  (lambda (guess x)
+    (< (abs (- (cube guess) x)) 0.001)))
+
+(define cube
+  (lambda (num)
+    (* num num num)))
+
+(define improve-cube
+  (lambda (guess x)
+    (/ (+ (/ x (square guess)) (* 2 guess)) 3)))
+
+(define cube-root
+  (lambda (x)
+    (cube-root-iter 1.0 x)))
+
+(cube-root 64)
