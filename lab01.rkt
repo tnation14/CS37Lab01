@@ -1,6 +1,6 @@
 #lang racket
 
-; YOUR NAME (AND YOUR PARTNER'S NAME IF YOU HAD ONE)
+; Taylor Nation, Michael Lumetta
 ; Lab 01
 
 ; Due Sunday, January 27 at 11:59pm
@@ -72,7 +72,7 @@
     ((if (> b 0) + -) a b)))
 
 
-;Adds a and b if b is positive, subtracts b from a.
+;Adds a and b if b is positive. If b is negative, subtracts b from a. Adds the absolute value of b to a
 
 
 
@@ -186,4 +186,4 @@
   (lambda (x)
     (cube-root-iter 1.0 x)))
 
-(cube-root 64)
+(cube-root 64) ;ought to evaluate to 4.
