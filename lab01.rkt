@@ -30,8 +30,8 @@
  )
 ; For example:  (Uncomment and use as test cases when you're done)
  (median 3 4 5); ==> 4
-; (median 6 1 8); ==> 6
-; (median 5 5 6); ==> 5
+ (median 6 1 8); ==> 6
+ (median 5 5 6); ==> 5
 
 (define fica-tax
   (lambda (income)
@@ -141,20 +141,20 @@
 ; Any function that recursively moves from a start guess to a goal using a check would not
 ; work with new-if. Consider this function:
  
- ;(define isGoal
- ;  (lambda (goal guess)
- ;    (= (guess goal) )
- ;    )
- ;  )
+ (define isGoal
+   (lambda (goal guess)
+     (= guess goal)
+     )
+   )
  	
- ; (define iter-correctGuess?
- ;	(lambda (guess goal)
- ;		(if (isGoal (goal guess)) guess
- ; 			(iter-correctGuess? (( + 1 guess) goal))
- ;			)
- ;		)
- ;	)
- 
+  (define iter-correctGuess?
+ 	(lambda (guess goal)
+ 		(if (isGoal goal guess) guess
+  			(iter-correctGuess? ( + 1 guess) goal))
+ 			)
+ 		)
+ 	
+ (iter-correctGuess? 2 10)
  ; Using new-if here, we would evaluate isGoal and the recursive call to iter-correctGuess
  ; before the new-if, leading to another infinite loop.
 
