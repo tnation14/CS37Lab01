@@ -91,7 +91,7 @@
 
 (define sqrt-iter
   (lambda (guess x)
-    (new-if (good-enough? guess x)
+    (if (good-enough? guess x)
         guess
         (sqrt-iter (improve guess x)
                    x))))
@@ -140,15 +140,21 @@
 ;    expect "if" to work.
 ; Any function that recursively moves from a start guess to a goal using a check would not
 ; work with new-if. Consider this function:
-
- (define iter-correctGuess?
- 	(lambda (guess,goal)
- 		(if (isGoal (guess)) #T
- 			(iter-correctGuess (guess+1,goal))
- 			)
- 		)
- 	)
+ 
+ ;(define isGoal
+ ;  (lambda (goal guess)
+ ;    (= (guess goal) )
+ ;    )
+ ;  )
  	
+ ; (define iter-correctGuess?
+ ;	(lambda (guess goal)
+ ;		(if (isGoal (goal guess)) guess
+ ; 			(iter-correctGuess? (( + 1 guess) goal))
+ ;			)
+ ;		)
+ ;	)
+ 
  ; Using new-if here, we would evaluate isGoal and the recursive call to iter-correctGuess
  ; before the new-if, leading to another infinite loop.
 
